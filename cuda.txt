@@ -1,0 +1,70 @@
+knn dane block 1 zmieniamy liczbę wątków:
+1.  4.31448s  426.30ms min 422.61ms max 459.25ms
+100. 117.17ms 11.717ms min 3.5629ms max 11.758ms
+200. 59.624ms 5.9624ms min 5.9494ms max 5.9835ms
+300. 40.669ms 4.0669ms min 4.0530ms max 4.0787ms
+400. 31.175ms 3.1175ms min 3.1062ms max 3.1237ms
+500. 26.263ms 2.6263ms min 2.6152ms max 2.6396ms
+1000. 22.391ms 2.2390ms min  2.2389ms max 2.2392ms
+
+knn dane 1 thred zmieniamu liczbę bloków:
+1. 4.31448s  426.30ms min 422.61ms max 459.25ms
+10.751.14ms 75.114ms  72.752ms  88.989ms
+100. 107.67ms  10.767ms  10.759ms  10.809ms
+200. 56.890ms 5.6890ms  5.6862ms  5.6911ms
+300. 38.942ms 3.8942ms  3.5575ms  6.3616ms
+400. 29.306ms 2.9306ms  2.9149ms  2.9482ms
+500.22.355ms 2.2355ms  2.2326ms  2.2387ms
+
+nvcc csvFunctions.cu Knn.cu
+nvprof --unified-memory-profiling off ./a.out
+knn n-thread size/n blocks 
+wątki ustawiamy na 1,100,200,300 itp a bloki obliczamy jako size/num_threads i na taką wartość ustawiamy
+1. 4.31448s  426.30ms min 422.61ms max 459.25ms
+100. 711.32us 71.132us  70.912us  71.295us
+200. 732.63us        10  73.263us  73.120us  73.472us
+300. 730.26us        10  73.026us  72.799us  73.503us
+400.720.79us        10  72.079us  71.903us  72.223us
+500. 711.71us        10  71.170us  71.103us  71.392us
+1000. 743.58us        10  74.357us  74.240us  74.495us
+
+standaryzacja block-1 a liczba wątków zmienna :
+1. 2.09691s        14  149.78ms  147.28ms  152.06ms
+100.  18.404ms        14  1.3145ms  1.3134ms  1.3288ms
+200. 8.9515ms        14  639.39us  639.03us  640.41us
+250.  8.2792ms        14  591.37us  591.32us  591.45us
+300. 8.6178ms        14  615.55us  611.80us  619.26us  
+400. 8.5559ms        14  611.14us  608.79us  612.22us
+500. 8.2111ms        14  586.51us  585.56us  589.82us
+750. 8.2042ms        14  586.02us  585.69us  586.27us
+1000. 8.0816ms        14  577.26us  576.99us  577.76us
+
+standaryzacja n-thread size/n blocks
+1. 3.8386ms  14  274.19us  273.98us  274.43us
+100. 180.74us        14  12.909us  12.832us  13.024us
+200. 163.84us        14  11.702us  11.648us  11.776us
+300. 158.14us        14  11.295us  11.232us  11.392us
+400. 160.19us        14  11.442us  11.391us  11.520us
+500. 161.22us        14  11.515us  11.456us  11.584us
+1000. 199.77us        14  14.269us  14.176us  14.304us
+
+
+nvcc csvFunctions.cu normalization.cu
+nvprof --unified-memory-profiling off ./a.out
+normalizacja block 1 liczba wątków:
+1. 8.11704s        14  579.79ms  348.05ms  916.57ms
+100. 82.205ms        14  5.8718ms  1.6197ms  12.077ms
+200.  47.474ms        14  3.3910ms  1.3040ms  5.2053ms
+300. 26.082ms        14  1.8630ms  1.0880ms  2.5491ms
+400. 25.625ms        14  1.8304ms  1.0683ms  2.5646ms
+500. 24.555ms        14  1.7540ms  1.0279ms  2.2270ms
+1000. 24.530ms        14  1.7522ms  1.0275ms  2.2271ms
+
+standaryzacja n-thread size/n blocks
+1. 8.11704s        14  579.79ms  348.05ms  916.57ms
+100. 365.79us        14  26.127us  16.480us  32.928us
+200. 339.42us        14  24.244us  15.520us  29.984us
+300. 334.20us        14  23.871us  16.448us  28.831us
+400. 334.91us        14  23.922us  15.680us  28.960us
+500. 335.45us        14  23.960us  15.968us  29.215us
+1000. 385.47us        14  27.533us  18.080us  34.016us
